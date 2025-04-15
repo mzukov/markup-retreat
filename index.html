@@ -1,12 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Markup retreat</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- Верстай звёздный рейтинг тут -->
-  </body>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Звёздный рейтинг</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+    }
+    .rating-container {
+      display: inline-block;
+    }
+    .rating-container input[type="radio"] {
+      display: none; 
+    }
+    .stars {
+      display: flex;
+      flex-direction: row-reverse; 
+      gap: 5px;
+    }
+    .stars label {
+      font-size: 40px;
+      color: #ccc; 
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .stars label:hover,
+    .stars label:hover ~ label {
+      color: gold;
+    }
+    .stars input[type="radio"]:checked ~ label {
+      color: gold;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="rating-container">
+    <div class="stars">
+      <input type="radio" id="star5" name="rating" value="5" />
+      <label for="star5">★</label>
+
+      <input type="radio" id="star4" name="rating" value="4" />
+      <label for="star4">★</label>
+
+      <input type="radio" id="star3" name="rating" value="3" />
+      <label for="star3">★</label>
+
+      <input type="radio" id="star2" name="rating" value="2" />
+      <label for="star2">★</label>
+
+      <input type="radio" id="star1" name="rating" value="1" />
+      <label for="star1">★</label>
+    </div>
+    <div class="result" id="ratingResult">
+      Поставьте свою оценку
+    </div>
+  </div>
+
+  <script>
+    const ratingInputs = document.querySelectorAll('input[name="rating"]');
+    const ratingResult = document.getElementById('ratingResult');
+
+    ratingInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        const value = input.value;
+        ratingResult.textContent = 'Ваша оценка: ' + value;
+        console.log('Выбран рейтинг:', value);
+      });
+    });
+  </script>
+</body>
 </html>
